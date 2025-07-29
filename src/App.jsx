@@ -1,11 +1,24 @@
 import { use, useEffect, useId, useState } from "react";
 import Die from "./Die";
-import {nanoid} from "nanoid";
+import { nanoid } from "nanoid";
 
 function App() {
   const [value, setValue] = useState(0);
   const [isHeld, setIsHeld] = useState(false);
   const [dice, setDice] = useState(allNewDice());
+  const [hasWin, setHasWin] = useState(false);
+
+  useEffect(() => {
+    const allDiceHeld = dice.every((die) => die.isHeld);
+    const firstDiceValue = dice[0].value;
+    const allDiceSame = dice.every((die) => die.value == firstDiceValue);
+
+    if (allDiceHeld && allDiceSame) {
+      setHasWin(true);
+    } else {
+      setHasWin(false);
+    }
+  }, [dice]);
 
   function holdDie(id) {
     setDice((beforeDices) =>
@@ -57,7 +70,9 @@ function App() {
         </p>
       </div>
       <div className="dice-container">{placeDice}</div>
-      <button onClick={rollDice}>Roll</button>
+      <button onClick={hasWin ? () => setDice(allNewDice()) : rollDice}>
+        {hasWin ? "New Game" : "Roll"}
+      </button>
     </div>
   );
 }
