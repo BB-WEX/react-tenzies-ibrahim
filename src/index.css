@@ -13,11 +13,54 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: solid 5px rgb(199, 199, 199);
+  border-radius: 20px;
+  box-shadow: inset 0px 0px 10px 5px rgb(199, 199, 199);
+  padding: 1rem;
+  width: 700px;
+  height: 400px;
+}
+
+.dice-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: solid;
+  gap: 20px;
+  padding: 0.5rem;
+  width: calc(420px);
+  height: 150px;
+}
+
+.die {
+  display: flex;
+  border: solid 3px;
+  border-radius: 10px;
+  padding: 25px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  place-items: center;
+  justify-content: center;
+  font-size: x-large;
+  user-select: none;
+}
+
+.die.freeze{
+  background-color: #55c6cc;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -25,6 +68,7 @@ a:hover {
 body {
   margin: 0;
   display: flex;
+  justify-content: center;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -46,9 +90,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -59,9 +105,11 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
