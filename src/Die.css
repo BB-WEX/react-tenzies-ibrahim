@@ -11,6 +11,7 @@
     font-size: x-large;
     user-select: none;
     transition: all 0.3s ease-in-out;
+    animation: normal roll 1s;
 }
 
 .die.freeze {
@@ -20,4 +21,10 @@
 .die:hover {
     transform: translateY(-5px) translateX(-5px);
     box-shadow: 5px 5px 14px black;
+}
+
+@keyframes roll {
+    from{
+        rotate: 360deg;
+    }
 }
