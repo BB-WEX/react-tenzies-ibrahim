@@ -14,9 +14,7 @@ const Timer = ({ seconds, setSeconds, hasWin }) => {
   }, [!hasWin]);
 
   return (
-    <div>
       <p>Timer: {seconds}s</p>
-    </div>
   );
 };
 

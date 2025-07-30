@@ -5,9 +5,12 @@ import { nanoid } from "nanoid";
 import Timer from "./Timer";
 
 function App() {
-  const [seconds, setSeconds] = useState(0);
   const [dice, setDice] = useState(allNewDice());
   const [hasWin, setHasWin] = useState(false);
+  const [seconds, setSeconds] = useState(0);
+  const [rolls, setRolls] = useState(0);
+  const bestTime = localStorage.getItem("bestTime");
+  const bestRolls = localStorage.getItem("bestRolls");
 
   useEffect(() => {
     const allDiceHeld = dice.every((die) => die.isHeld);
@@ -16,11 +19,22 @@ function App() {
 
     if (allDiceHeld && allDiceSame) {
       setHasWin(true);
+      {
+        !localStorage.getItem("bestTime")
+          ? localStorage.setItem("bestTime", seconds)
+          : localStorage.getItem("bestTime") > seconds &&
+            localStorage.setItem("bestTime", seconds);
+      }
+      {
+        !localStorage.getItem("bestRolls")
+          ? localStorage.setItem("bestRolls", rolls)
+          : localStorage.getItem("bestRolls") > rolls &&
+            localStorage.setItem("bestRolls", rolls);
+      }
     } else {
       setHasWin(false);
     }
   }, [dice]);
-
 
   function holdDie(id) {
     setDice((beforeDices) =>
@@ -32,6 +46,7 @@ function App() {
   }
 
   function rollDice() {
+    setRolls((prevRolls) => prevRolls + 1);
     setDice((beforeDices) =>
       beforeDices.map((die) => (die.isHeld ? die : generateNewDie()))
     );
@@ -71,12 +86,21 @@ function App() {
           Roll until all dice are the same. Click each die to freeze it at its
           current value between rolls.
         </p>
-        <Timer seconds={seconds} setSeconds={setSeconds} hasWin={hasWin} />
+        <div className="stats">
+          <Timer seconds={seconds} setSeconds={setSeconds} hasWin={hasWin} />
+          <p>Rolls: {rolls}</p>
+          <p>Best time: {bestTime ? bestTime : "0"}s</p>
+          <p>Best rolls: {bestRolls ? bestRolls : "0"}</p>
+        </div>
       </div>
       <div className="dice-container">{placeDice}</div>
       <button
         className={hasWin ? "btn win" : "btn roll"}
-        onClick={hasWin ? (() => setDice(allNewDice()) + setSeconds(0) ) : rollDice}
+        onClick={
+          hasWin
+            ? () => setDice(allNewDice()) + setSeconds(0) + setRolls(0)
+            : rollDice
+        }
       >
         {hasWin ? "New Game" : "Roll"}
       </button>

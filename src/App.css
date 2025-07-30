@@ -37,6 +37,12 @@
     animation: normal win 1.5s ease-in-out, infinite alternate win-bounce 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
+.stats{
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+}
+
 @keyframes win-bounce {
     from {
         transform: translate(5px, -10px);
