@@ -2,10 +2,10 @@ import { use, useEffect, useId, useState } from "react";
 import Die from "./Die";
 import "./App.css";
 import { nanoid } from "nanoid";
+import Timer from "./Timer";
 
 function App() {
-  const [value, setValue] = useState(0);
-  const [isHeld, setIsHeld] = useState(false);
+  const [seconds, setSeconds] = useState(0);
   const [dice, setDice] = useState(allNewDice());
   const [hasWin, setHasWin] = useState(false);
 
@@ -20,6 +20,7 @@ function App() {
       setHasWin(false);
     }
   }, [dice]);
+
 
   function holdDie(id) {
     setDice((beforeDices) =>
@@ -70,11 +71,12 @@ function App() {
           Roll until all dice are the same. Click each die to freeze it at its
           current value between rolls.
         </p>
+        <Timer seconds={seconds} setSeconds={setSeconds} hasWin={hasWin} />
       </div>
       <div className="dice-container">{placeDice}</div>
       <button
         className={hasWin ? "btn win" : "btn roll"}
-        onClick={hasWin ? () => setDice(allNewDice()) : rollDice}
+        onClick={hasWin ? (() => setDice(allNewDice()) + setSeconds(0) ) : rollDice}
       >
         {hasWin ? "New Game" : "Roll"}
       </button>

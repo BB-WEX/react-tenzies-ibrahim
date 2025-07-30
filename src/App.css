@@ -8,7 +8,7 @@
     box-shadow: inset 0px 0px 10px 5px rgb(199, 199, 199);
     padding: 1rem;
     width: 700px;
-    height: 400px;
+    height: 450px;
 }
 
 .dice-container {
@@ -35,10 +35,6 @@
 
 .btn.win {
     animation: normal win 1.5s ease-in-out, infinite alternate win-bounce 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.btn.win:hover {
-    animation-play-state: paused;
 }
 
 @keyframes win-bounce {
