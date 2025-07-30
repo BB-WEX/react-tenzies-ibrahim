@@ -1,5 +1,6 @@
 import { use, useEffect, useId, useState } from "react";
 import Die from "./Die";
+import "./App.css";
 import { nanoid } from "nanoid";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
   function holdDie(id) {
     setDice((beforeDices) =>
       beforeDices.map((die) =>
+        // Comapre ids with clicked id, if true copy and only change the isHeld value, otherwise keep same
         die.id === id ? { ...die, isHeld: !die.isHeld } : die
       )
     );
@@ -70,7 +72,10 @@ function App() {
         </p>
       </div>
       <div className="dice-container">{placeDice}</div>
-      <button onClick={hasWin ? () => setDice(allNewDice()) : rollDice}>
+      <button
+        className={hasWin ? "btn win" : "btn roll"}
+        onClick={hasWin ? () => setDice(allNewDice()) : rollDice}
+      >
         {hasWin ? "New Game" : "Roll"}
       </button>
     </div>

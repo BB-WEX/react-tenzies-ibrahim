@@ -1,0 +1,23 @@
+.die {
+    display: flex;
+    border: solid 3px;
+    border-radius: 10px;
+    padding: 25px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    place-items: center;
+    justify-content: center;
+    font-size: x-large;
+    user-select: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.die.freeze {
+    background-color: #55c6cc;
+}
+
+.die:hover {
+    transform: translateY(-5px) translateX(-5px);
+    box-shadow: 5px 5px 14px black;
+}
