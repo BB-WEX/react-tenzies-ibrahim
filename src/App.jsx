@@ -3,6 +3,7 @@ import Die from "./Die";
 import "./App.css";
 import { nanoid } from "nanoid";
 import Timer from "./Timer";
+import explodeConfetti from "./Confetti";
 
 function App() {
   const [dice, setDice] = useState(allNewDice());
@@ -19,6 +20,8 @@ function App() {
 
     if (allDiceHeld && allDiceSame) {
       setHasWin(true);
+      explodeConfetti();
+
       {
         !localStorage.getItem("bestTime")
           ? localStorage.setItem("bestTime", seconds)
